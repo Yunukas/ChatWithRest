@@ -1,5 +1,5 @@
 # ChatWithRest
-1. Properties
+## Properties
    - [x] A simple WPF application that uses a REST API (on HEROKU) to send and receive messages.
    - [x] Users can create block lists and block other users' messages.
    - [ ] Direct message option
