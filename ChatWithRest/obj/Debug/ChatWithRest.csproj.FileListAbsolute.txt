@@ -1,0 +1,17 @@
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\bin\Debug\ChatWithRest.exe.config
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\bin\Debug\ChatWithRest.exe
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\bin\Debug\ChatWithRest.pdb
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest.csprojAssemblyReference.cache
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\MainWindow.baml
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\MainWindow.g.cs
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\App.g.cs
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest_MarkupCompile.cache
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest.g.resources
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest.Properties.Resources.resources
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest.csproj.GenerateResource.cache
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest.csproj.CoreCompileInputs.cache
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest.csproj.CopyComplete
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest.exe
+C:\Users\Yunus\source\repos\ChatWithRest\ChatWithRest\obj\Debug\ChatWithRest.pdb
