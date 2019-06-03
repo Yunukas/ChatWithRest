@@ -262,5 +262,16 @@ namespace ChatWithRest
                 sr.Write(serializedJson);
             }
         }
+
+        // this method will search through the List of Chat objects
+        // and return the results containing the search key
+        // we are searching in both messages and sender fields
+        public static List<Chat> SearchChat(string searchKey)
+        {
+            var result = ChatList.Where(x => x.Fields.Message.Contains(searchKey) ||
+            x.Fields.Username.Contains(searchKey)).Select(y => y).ToList();
+
+            return result;
+        }
     }
 }

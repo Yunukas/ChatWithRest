@@ -29,18 +29,18 @@
             <Button x:Name="btn_dm_user" Content="Send message" HorizontalAlignment="Left" Margin="183,101,0,0" VerticalAlignment="Top" Width="109" Click="Btn_dm_user_Click"/>
 
         </Grid>
-        <Grid x:Name="grid_direct_message2" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Visible">
+        <Grid x:Name="grid_direct_message2" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">
             <Label x:Name="lbl_dm" Content="Direct Message" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
             <ListBox x:Name="lb_direct_message" HorizontalAlignment="Left" Height="270" Margin="10,42,0,0" VerticalAlignment="Top" Width="305"/>
             <TextBox x:Name="txt_direct_message" HorizontalAlignment="Left" Height="23" Margin="10,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" KeyUp="Txt_direct_message_KeyUp"/>
             <Button x:Name="btn_direct_message_send" Content="Send" HorizontalAlignment="Left" Margin="240,332,0,0" VerticalAlignment="Top" Width="75" Click="Btn_direct_message_send_Click"/>
         </Grid>
 
-        <Grid x:Name="grid_search" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">
+        <Grid x:Name="grid_search" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Visible">
             <Label Content="Search" HorizontalAlignment="Left" Margin="104,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
             <ListBox x:Name="lb_search" HorizontalAlignment="Left" Height="270" Margin="10,86,0,0" VerticalAlignment="Top" Width="305"/>
-            <TextBox x:Name="txt_search" HorizontalAlignment="Left" Height="23" Margin="10,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208"/>
-            <Button x:Name="btn_search_send" Content="Send" HorizontalAlignment="Left" Margin="240,42,0,0" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="txt_search" HorizontalAlignment="Left" Height="23" Margin="10,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" KeyUp="Txt_search_KeyUp"/>
+            <Button x:Name="btn_search_send" Content="Send" HorizontalAlignment="Left" Margin="240,42,0,0" VerticalAlignment="Top" Width="75" Click="Btn_search_send_Click"/>
         </Grid>
         <Grid x:Name="grid_block" HorizontalAlignment="Left" Height="380" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">
             <Label Content="Block users" HorizontalAlignment="Left" Margin="104,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>

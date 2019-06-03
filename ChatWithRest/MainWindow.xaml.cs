@@ -24,23 +24,27 @@ namespace ChatWithRest
         {
             await WorkHorse.GetAllChatAsync();
 
-            FillChatBox();
+            FillChatBox("chat", WorkHorse.ChatList);
         }
 
         private async void PostChatAsync(string message)
         {
             await WorkHorse.PostChatAsync(MainUser.UserName, message);
 
-            FillChatBox();
+            FillChatBox("chat", WorkHorse.ChatList);
         }
 
-        private void FillChatBox()
+        private void FillChatBox(string location, List<Chat> chatList)
         {
-            lb_chat.Items.Clear();
+            if(location.Equals("chat"))
+                lb_chat.Items.Clear();
 
-            if(WorkHorse.ChatList.Count > 0)
+            if (location.Equals("search"))
+                lb_search.Items.Clear();
+
+            if (WorkHorse.ChatList.Count > 0)
             {
-                foreach (var chat in WorkHorse.ChatList)
+                foreach (var chat in chatList)
                 {
                     string sender = chat.Fields.Username;
                     string message = chat.Fields.Message;
@@ -49,7 +53,11 @@ namespace ChatWithRest
                     if (WorkHorse.IsBlocked(MainUser.UserName, sender))
                         message = "*** blocked ***";
 
-                    lb_chat.Items.Add(sender + ": " + message);
+                    if (location.Equals("chat"))
+                        lb_chat.Items.Add(sender + ": " + message);
+
+                    if (location.Equals("search"))
+                        lb_search.Items.Add(sender + ": " + message);
                 }
             }  
         }
@@ -86,7 +94,7 @@ namespace ChatWithRest
                 return;
 
             ChangeGrid("chat");
-            FillChatBox();
+            FillChatBox("chat", WorkHorse.ChatList);
         }
 
         private void Btn_direct_message_Click(object sender, RoutedEventArgs e)
@@ -107,6 +115,7 @@ namespace ChatWithRest
         private void Btn_search_Click(object sender, RoutedEventArgs e)
         {
             ChangeGrid("search");
+            FillChatBox("search", WorkHorse.ChatList);
         }
 
         private void Btn_block_Click(object sender, RoutedEventArgs e)
@@ -311,6 +320,24 @@ namespace ChatWithRest
             FillDMChatList();
         }
 
-        
+        private void Btn_search_send_Click(object sender, RoutedEventArgs e)
+        {
+            string searchKey = txt_search.Text.Trim();
+
+            if(searchKey.Length > 0)
+            {
+                txt_search.Text = "";
+                List<Chat> chatList = WorkHorse.SearchChat(searchKey);
+                FillChatBox("search", chatList);
+            }
+            else
+                FillChatBox("search", WorkHorse.ChatList);
+        }
+
+        private void Txt_search_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Btn_search_send_Click(sender, new RoutedEventArgs());
+        }
     }
 }
