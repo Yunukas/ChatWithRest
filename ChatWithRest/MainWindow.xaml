@@ -1,4 +1,4 @@
-﻿<Window x:Class="chat.MainWindow"
+﻿<Window x:Class="ChatWithRest.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,7 +16,7 @@
             <TextBox x:Name="txt_sign_in" HorizontalAlignment="Left" Height="23" Margin="10,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" KeyUp="Txt_sign_in_KeyUp"/>
             <Button x:Name="btn_sign_in" Content="Login" HorizontalAlignment="Left" Margin="240,89,0,0" VerticalAlignment="Top" Width="75" Click="Btn_sign_in_Click"/>
         </Grid>
-        <Grid x:Name="grid_chat" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Visible">
+        <Grid x:Name="grid_chat" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">
             <Label Content="Chatroom" HorizontalAlignment="Left" Margin="114,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
             <ListBox x:Name="lb_chat" HorizontalAlignment="Left" Height="270" Margin="10,42,0,0" VerticalAlignment="Top" Width="305"/>
             <TextBox x:Name="txt_chat" HorizontalAlignment="Left" Height="23" Margin="10,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" KeyUp="Txt_chat_KeyUp"/>
@@ -25,15 +25,15 @@
         <Grid x:Name="grid_direct_message1" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">
             <Label Content="Direct Message" HorizontalAlignment="Left" Margin="104,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
             <Label Content="Enter username you would like to direct message." HorizontalAlignment="Left" Margin="37,37,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txt_dm_user" HorizontalAlignment="Left" Height="23" Margin="50,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.738,0.261"/>
-            <Button x:Name="btn_dm_user" Content="Send message" HorizontalAlignment="Left" Margin="183,101,0,0" VerticalAlignment="Top" Width="109"/>
+            <TextBox x:Name="txt_dm_user" HorizontalAlignment="Left" Height="23" Margin="50,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.738,0.261" KeyUp="Txt_dm_user_KeyUp"/>
+            <Button x:Name="btn_dm_user" Content="Send message" HorizontalAlignment="Left" Margin="183,101,0,0" VerticalAlignment="Top" Width="109" Click="Btn_dm_user_Click"/>
 
         </Grid>
-        <Grid x:Name="grid_direct_message2" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">
-            <Label x:Name="lbl_dm" Content="Direct Message" HorizontalAlignment="Left" Margin="104,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
+        <Grid x:Name="grid_direct_message2" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Visible">
+            <Label x:Name="lbl_dm" Content="Direct Message" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
             <ListBox x:Name="lb_direct_message" HorizontalAlignment="Left" Height="270" Margin="10,42,0,0" VerticalAlignment="Top" Width="305"/>
-            <TextBox x:Name="txt_direct_message" HorizontalAlignment="Left" Height="23" Margin="10,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208"/>
-            <Button x:Name="btn_direct_message_send" Content="Send" HorizontalAlignment="Left" Margin="240,332,0,0" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="txt_direct_message" HorizontalAlignment="Left" Height="23" Margin="10,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" KeyUp="Txt_direct_message_KeyUp"/>
+            <Button x:Name="btn_direct_message_send" Content="Send" HorizontalAlignment="Left" Margin="240,332,0,0" VerticalAlignment="Top" Width="75" Click="Btn_direct_message_send_Click"/>
         </Grid>
 
         <Grid x:Name="grid_search" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">

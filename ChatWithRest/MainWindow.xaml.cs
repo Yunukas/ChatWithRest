@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 
 
-namespace chat
+namespace ChatWithRest
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -20,14 +20,14 @@ namespace chat
 
         // this method will call the GetChat() method in WorkHorse class
         // and will populate the chat list box with the results
-        private async void GetChat()
+        private async void GetChatAsync()
         {
-            await WorkHorse.GetChat();
+            await WorkHorse.GetAllChatAsync();
 
             FillChatBox();
         }
 
-        private async void PostChat(string message)
+        private async void PostChatAsync(string message)
         {
             await WorkHorse.PostChatAsync(MainUser.UserName, message);
 
@@ -38,17 +38,20 @@ namespace chat
         {
             lb_chat.Items.Clear();
 
-            foreach (var chat in WorkHorse.ChatList)
+            if(WorkHorse.ChatList.Count > 0)
             {
-                string sender = chat.Fields.Username;
-                string message = chat.Fields.Message;
+                foreach (var chat in WorkHorse.ChatList)
+                {
+                    string sender = chat.Fields.Username;
+                    string message = chat.Fields.Message;
 
-                // check if the sender is blocked, if so; block the message
-                if (WorkHorse.IsBlocked(MainUser.UserName, sender))
-                    message = "*** blocked ***";
+                    // check if the sender is blocked, if so; block the message
+                    if (WorkHorse.IsBlocked(MainUser.UserName, sender))
+                        message = "*** blocked ***";
 
-                lb_chat.Items.Add(sender + ": " + message);
-            }
+                    lb_chat.Items.Add(sender + ": " + message);
+                }
+            }  
         }
 
         // when user clicks login button
@@ -62,12 +65,10 @@ namespace chat
             {
                 MainUser = new User(name);
 
-                GetChat();
+                GetChatAsync();
 
                 // reveal chat grid
                 ChangeGrid("chat");
-
-
             }
         }
 
@@ -94,6 +95,13 @@ namespace chat
                 return;
 
             ChangeGrid("dm1");
+
+            // everytime DM page is opened, clear the receiver
+            // a new receiver will be set each time
+            WorkHorse.DMReceiver = "";
+
+            // clear the dictionary of DMs 
+            WorkHorse.ClearDMs();
         }
 
         private void Btn_search_Click(object sender, RoutedEventArgs e)
@@ -182,9 +190,7 @@ namespace chat
         private void Txt_block_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            {
                 Btn_block_send_Click(sender, new RoutedEventArgs());
-            }
         }
 
         private void ShowBlockedList()
@@ -226,7 +232,7 @@ namespace chat
 
             if (message.Length > 0)
             {
-                PostChat(message);
+                PostChatAsync(message);
                 txt_chat.Text = "";
             }
         }
@@ -234,9 +240,77 @@ namespace chat
         private void Txt_chat_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-            {
                 Btn_chat_send_Click(sender, new RoutedEventArgs());
+        }
+
+        // this button sets the receiver of DMs
+        private void Btn_dm_user_Click(object sender, RoutedEventArgs e)
+        {
+            string receiver = txt_dm_user.Text.Trim();
+
+            if (receiver.Length > 0)
+            {
+                txt_dm_user.Text = "";
+                WorkHorse.DMReceiver = receiver;
+                ChangeGrid("dm2");
+                lbl_dm.Content = "Direct message to: " + receiver;
+                GetDMsAsync();
             }
         }
+
+        private async void GetDMsAsync()
+        {
+            await WorkHorse.GetDMsAsync(MainUser.UserName, WorkHorse.DMReceiver);
+            FillDMChatList();
+        }
+
+        private void Txt_dm_user_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+                Btn_dm_user_Click(sender, new RoutedEventArgs());
+        }
+
+        private void FillDMChatList()
+        {
+            // firstly, clear the list box
+            lb_direct_message.Items.Clear();
+
+            if (WorkHorse.DMChatList.Count > 0)
+            {
+                foreach(DirectMessage dm in WorkHorse.DMChatList)
+                {
+                    lb_direct_message.Items.Add(dm.Fields.Sender + ": " + dm.Fields.Message);
+                }
+            }
+        }
+
+        // when user clicks direct message send button
+        private void Btn_direct_message_send_Click(object sender, RoutedEventArgs e)
+        {
+            string message = txt_direct_message.Text.Trim();
+
+            if(message.Length > 0)
+            {
+                txt_direct_message.Text = "";
+                PostDMAsync(message);
+            }
+        }
+        // when user presses enter to send DM
+        private void Txt_direct_message_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Btn_direct_message_send_Click(sender, new RoutedEventArgs());
+        }
+
+        // Post DM in async fashion
+        private async void PostDMAsync(string message)
+        {
+            // post message asynchronously
+            await WorkHorse.PostDMAsync(MainUser.UserName, WorkHorse.DMReceiver, message);
+            // when the task completes, fill the dm chat list box
+            FillDMChatList();
+        }
+
+        
     }
 }
