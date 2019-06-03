@@ -267,6 +267,7 @@ namespace ChatWithRest
             {
                 txt_dm_user.Text = "";
                 WorkHorse.DMReceiver = receiver;
+                lb_direct_message.Items.Clear();
                 ChangeGrid("dm2");
                 lbl_dm.Content = "Direct message to: " + receiver;
                 GetDMsAsync();

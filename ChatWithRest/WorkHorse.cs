@@ -73,6 +73,9 @@ namespace ChatWithRest
         // get the DMs of active user
         public static async Task<List<DirectMessage>> GetDMsAsync(string sender, string receiver)
         {
+            sender = sender.ToLower();
+            receiver = receiver.ToLower();
+
             string json = "";
             // used by Visual Studio to create socket connections
             HttpClient client = new HttpClient();
@@ -142,6 +145,9 @@ namespace ChatWithRest
         // post a chat to the chat board
         public static async Task<List<DirectMessage>> PostDMAsync(string sender, string receiver, string message)
         {
+            // the directmessage module on the API is case sensitive
+            sender = sender.ToLower();
+            receiver = receiver.ToLower();
 
             // used by Visual Studio to create socket connections
             HttpClient client = new HttpClient();
@@ -195,6 +201,8 @@ namespace ChatWithRest
         // get the list of users who are blocked by the active user
         public static List<string> GetBlockedUsers(string mainUser)
         {
+            mainUser = mainUser.ToLower();
+
             foreach (KeyValuePair<string, List<string>> kv in BlockedUsersDict)
             {
                 if (kv.Key.Equals(mainUser))
@@ -209,6 +217,9 @@ namespace ChatWithRest
         // check if a user is blocked by the active user
         public static bool IsBlocked(string mainUser, string user)
         {
+            user = user.ToLower();
+            mainUser = mainUser.ToLower();
+
             foreach (KeyValuePair<string, List<string>> kv in BlockedUsersDict)
             {
                 if (kv.Key.Equals(mainUser))
@@ -224,6 +235,9 @@ namespace ChatWithRest
         // it will also write to the blocked.txt file
         public static void BlockUser(string mainUser, string user)
         {
+            user = user.ToLower();
+            mainUser = mainUser.ToLower();
+
             if (IsBlocked(mainUser, user))
                 return;
 
@@ -231,7 +245,7 @@ namespace ChatWithRest
             if (BlockedUsersDict.ContainsKey(mainUser))
                 BlockedUsersDict[mainUser].Add(user);
             else
-                BlockedUsersDict.Add(mainUser, new List<string> { user });
+                BlockedUsersDict.Add(mainUser, new List<string> { user});
 
             UpdateBlockedTextFile();
         }
@@ -239,6 +253,9 @@ namespace ChatWithRest
         // unblocking a user
         public static void UnblockUser(string mainUser, string user)
         {
+            user = user.ToLower();
+            mainUser = mainUser.ToLower();
+
             foreach (KeyValuePair<string, List<string>> kv in BlockedUsersDict)
             {
                 if (kv.Key.Equals(mainUser))
@@ -268,8 +285,10 @@ namespace ChatWithRest
         // we are searching in both messages and sender fields
         public static List<Chat> SearchChat(string searchKey)
         {
-            var result = ChatList.Where(x => x.Fields.Message.Contains(searchKey) ||
-            x.Fields.Username.Contains(searchKey)).Select(y => y).ToList();
+            searchKey = searchKey.ToLower();
+
+            var result = ChatList.Where(x => x.Fields.Message.ToLower().Contains(searchKey) ||
+            x.Fields.Username.ToLower().Contains(searchKey)).Select(y => y).ToList();
 
             return result;
         }
