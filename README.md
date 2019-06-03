@@ -4,3 +4,4 @@
    - [x] Users can create block lists and block other users' messages.
    - [x] Direct message option
    - [x] Users can search messages for given test ( thanks LINQ )
+   - [x] Simple sign out function
