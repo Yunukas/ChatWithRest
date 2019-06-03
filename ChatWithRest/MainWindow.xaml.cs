@@ -72,6 +72,10 @@ namespace ChatWithRest
             if (name.Length > 0)
             {
                 MainUser = new User(name);
+                txt_sign_in.Text = "";
+                btn_sign_out.IsEnabled = true;
+                lb_login_message.Content = "Signed in as:";
+                lb_login_name.Content = MainUser.UserName;
 
                 GetChatAsync();
 
@@ -202,6 +206,8 @@ namespace ChatWithRest
                 Btn_block_send_Click(sender, new RoutedEventArgs());
         }
 
+        // this method will fill the blocked users list box 
+        // with users who are blocked by the active user
         private void ShowBlockedList()
         {
             List<string> blockedList = WorkHorse.GetBlockedUsers(MainUser.UserName);
@@ -217,7 +223,7 @@ namespace ChatWithRest
             }
 
         }
-
+        // this method removes the selected user from blocked list
         private void Btn_remove_block_Click(object sender, RoutedEventArgs e)
         {
             // get the selected user
@@ -252,7 +258,7 @@ namespace ChatWithRest
                 Btn_chat_send_Click(sender, new RoutedEventArgs());
         }
 
-        // this button sets the receiver of DMs
+        // this button sets the recepient of DMs
         private void Btn_dm_user_Click(object sender, RoutedEventArgs e)
         {
             string receiver = txt_dm_user.Text.Trim();
@@ -267,18 +273,22 @@ namespace ChatWithRest
             }
         }
 
+        // when user presses enter to add a dm recepient
+        private void Txt_dm_user_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Btn_dm_user_Click(sender, new RoutedEventArgs());
+        }
+
+        // get the DMs asynchronously and fill the dm chat list
         private async void GetDMsAsync()
         {
             await WorkHorse.GetDMsAsync(MainUser.UserName, WorkHorse.DMReceiver);
             FillDMChatList();
         }
 
-        private void Txt_dm_user_KeyUp(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter)
-                Btn_dm_user_Click(sender, new RoutedEventArgs());
-        }
-
+        // this will fill the DM Chat List Box with if there is a conversation
+        // between active user and the receiver
         private void FillDMChatList()
         {
             // firstly, clear the list box
@@ -288,7 +298,14 @@ namespace ChatWithRest
             {
                 foreach(DirectMessage dm in WorkHorse.DMChatList)
                 {
-                    lb_direct_message.Items.Add(dm.Fields.Sender + ": " + dm.Fields.Message);
+                    string sender = dm.Fields.Sender;
+                    string message = dm.Fields.Message;
+
+                    // also block messages in DM if a user blocked the sender
+                    if(WorkHorse.IsBlocked(MainUser.UserName, sender))
+                        message = "*** blocked ***";
+
+                    lb_direct_message.Items.Add(sender + ": " + message);
                 }
             }
         }
@@ -338,6 +355,17 @@ namespace ChatWithRest
         {
             if (e.Key == Key.Enter)
                 Btn_search_send_Click(sender, new RoutedEventArgs());
+        }
+
+        // added and extra option to sign out
+        private void Btn_sign_out_Click(object sender, RoutedEventArgs e)
+        {
+            MainUser = null;
+            btn_sign_out.IsEnabled = false;
+            lb_login_message.Content = "Signed out";
+            lb_login_name.Content = "";
+
+            ChangeGrid("signin");
         }
     }
 }

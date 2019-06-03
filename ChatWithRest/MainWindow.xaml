@@ -6,11 +6,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="429" Width="458">
     <Grid>
-        <Button x:Name="btn_chat" Content="Chat" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="100" Click="Btn_chat_Click"/>
-        <Button x:Name="btn_direct_message" Content="Direct message" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="100" Click="Btn_direct_message_Click"/>
-        <Button x:Name="btn_search" Content="Search" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="100" Click="Btn_search_Click"/>
-        <Button x:Name="btn_block" Content="Block" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" Width="100" Click="Btn_block_Click"/>
-        <Grid x:Name="grid_sign_in" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">
+        <Button x:Name="btn_chat" Content="Chat" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="100" Click="Btn_chat_Click"/>
+        <Button x:Name="btn_direct_message" Content="Direct message" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top" Width="100" Click="Btn_direct_message_Click"/>
+        <Button x:Name="btn_search" Content="Search" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Width="100" Click="Btn_search_Click"/>
+        <Button x:Name="btn_block" Content="Block" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top" Width="100" Click="Btn_block_Click"/>
+        <Grid x:Name="grid_sign_in" HorizontalAlignment="Left" Height="378" Margin="115,15,0,0" VerticalAlignment="Top" Width="325" Visibility="Visible">
             <Label Content="Sign in" HorizontalAlignment="Left" Margin="114,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
             <Label Content="Enter username you would like to sign in as." HorizontalAlignment="Left" Margin="37,37,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txt_sign_in" HorizontalAlignment="Left" Height="23" Margin="10,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" KeyUp="Txt_sign_in_KeyUp"/>
@@ -36,7 +36,7 @@
             <Button x:Name="btn_direct_message_send" Content="Send" HorizontalAlignment="Left" Margin="240,332,0,0" VerticalAlignment="Top" Width="75" Click="Btn_direct_message_send_Click"/>
         </Grid>
 
-        <Grid x:Name="grid_search" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Visible">
+        <Grid x:Name="grid_search" HorizontalAlignment="Left" Height="378" Margin="115,10,0,0" VerticalAlignment="Top" Width="325" Visibility="Hidden">
             <Label Content="Search" HorizontalAlignment="Left" Margin="104,0,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
             <ListBox x:Name="lb_search" HorizontalAlignment="Left" Height="270" Margin="10,86,0,0" VerticalAlignment="Top" Width="305"/>
             <TextBox x:Name="txt_search" HorizontalAlignment="Left" Height="23" Margin="10,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" KeyUp="Txt_search_KeyUp"/>
@@ -49,5 +49,8 @@
             <Button x:Name="btn_block_send" Content="Block" HorizontalAlignment="Left" Margin="240,42,0,0" VerticalAlignment="Top" Width="75" Click="Btn_block_send_Click"/>
             <Button x:Name="btn_remove_block" Content="Remove" HorizontalAlignment="Left" Margin="10,348,0,0" VerticalAlignment="Top" Width="75" Click="Btn_remove_block_Click"/>
         </Grid>
+        <Button x:Name="btn_sign_out" Content="Sign Out" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top" Width="100" Click="Btn_sign_out_Click" IsEnabled="False"/>
+        <Label x:Name="lb_login_message" Content="Signed out" HorizontalAlignment="Left" Margin="10,1,0,0" VerticalAlignment="Top" Width="100" Height="24" FontSize="10"/>
+        <Label x:Name="lb_login_name" Content="" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Width="100" Height="24" FontSize="10"/>
     </Grid>
 </Window>
