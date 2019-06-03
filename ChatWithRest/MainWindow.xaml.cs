@@ -265,6 +265,14 @@ namespace ChatWithRest
 
             if (receiver.Length > 0)
             {
+                // prevent DMing to self
+                if(receiver.ToLower().Equals(MainUser.UserName.ToLower()))
+                {
+                    MessageBox.Show("You cant DM yourself!");
+                    txt_dm_user.Text = "";
+                    return;
+                }
+
                 txt_dm_user.Text = "";
                 WorkHorse.DMReceiver = receiver;
                 lb_direct_message.Items.Clear();
